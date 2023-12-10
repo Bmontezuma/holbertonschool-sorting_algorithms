@@ -1,4 +1,5 @@
 #include "sort.h"
+#include <stdio.h>
 
 /**
  * insertion_sort_list - Sorts a doubly linked list of integers in ascending order
@@ -35,12 +36,17 @@ void insertion_sort_list(listint_t **list)
             /* Print list after each swap */
             print_list(*list);
 
-            /* Move pointer backward */
+            /* Move back pointer backward */
             back = current->prev;
         }
 
-        /* Move pointer forward */
+        /* Move current pointer forward */
         current = current->next;
     }
 }
 
+int main(void)
+{
+    /* Test your function here if needed */
+    return 0;
+}
