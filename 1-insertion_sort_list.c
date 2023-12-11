@@ -1,5 +1,6 @@
 #include "sort.h"
 #include <stdio.h>
+#include <stddef.h>
 
 /**
  * insertion_sort_list - Sorts a doubly linked list of integers
@@ -19,8 +20,8 @@ void insertion_sort_list(listint_t **list)
 	temp = current;
 	while (temp->prev != NULL && temp->n < temp->prev->n)
 	{
-		/* Swap nodes and print the list after each swap */
-		if (temp->next != NULL)
+	/* Swap nodes and print the list after each swap */
+	if (temp->next != NULL)
 		temp->next->prev = temp->prev;
 		temp->prev->next = temp->next;
 		temp->next = temp->prev;
