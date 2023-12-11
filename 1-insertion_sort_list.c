@@ -3,43 +3,40 @@
 
 /**
  * insertion_sort_list - Sorts a doubly linked list of integers
- * using the Insertion sort algorithm.
- * @list: A pointer to the doubly linked list.
+ * in ascending order using the Insertion sort algorithm.
+ * @list: A pointer to the pointer to the head of the list.
  */
 void insertion_sort_list(listint_t **list)
 {
-	if (list == NULL || *list == NULL || (*list)->next == NULL)
+	listint_t *current, *temp;
+
+	if (list == NULL || *list == NULL)
 		return;
 
-	listint_t *current = (*list)->next;
+	current = (*list)->next;
 	while (current != NULL)
 	{
-	listint_t *back = current->prev;
-	while (back != NULL && back->n > current->n)
+	temp = current;
+	while (temp->prev != NULL && temp->n < temp->prev->n)
 	{
-		/* Swap nodes */
-		if (back->prev != NULL)
-			back->prev->next = current;
-		if (current->next != NULL)
-			current->next->prev = back;
+		/* Swap nodes and print the list after each swap */
+		if (temp->next != NULL)
+		temp->next->prev = temp->prev;
+		temp->prev->next = temp->next;
+		temp->next = temp->prev;
+		temp->prev = temp->prev->prev;
+		temp->next->prev = temp;
 
-			back->next = current->next;
-			current->prev = back->prev;
+	if (temp->prev != NULL)
+		temp->prev->next = temp;
 
-			current->next = back;
-			back->prev = current;
+	if ((*list)->prev != NULL)
+		*list = (*list)->prev;
+	else
+		*list = temp;
 
-		/* Update list if back was the head */
-		if (back == *list)
-			*list = current;
-
-		/* Print list after each swap */
-			print_list(*list);
-
-		/* Move back pointer backward */
-			back = current->prev;
+		print_list(*list);
 	}
-
-		/* Move current pointer forward */
-			current = curren
-
+		current = current->next;
+	}
+}
