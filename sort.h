@@ -20,6 +20,7 @@ void quick_sort_recursive(int *array, int low, int high);
 void quick_sort(int *array, size_t size);
 int lomuto_partition(int *array, int low, int high);
 void insertion_sort_list(listint_t **list);
-void print_list(const listint_t *list);	
+void print_list(const listint_t *list);
+void exchange_elements(int *a, int *b);
 #endif /* SORT_H */
 
