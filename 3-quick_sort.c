@@ -41,6 +41,7 @@ int lomuto_partition(int *array, int low, int high)
         if (array[j] <= pivot)
         {
             i++;
+
             if (i != j)
             {
                 /* Swap array[i] and array[j] */
@@ -52,17 +53,15 @@ int lomuto_partition(int *array, int low, int high)
         }
     }
 
-    /* Swap array[i + 1] and array[high] (pivot) */
-    if (i + 1 != high)
-    {
-        int temp = array[i + 1];
-        array[i + 1] = array[high];
-        array[high] = temp;
-        printf("Swapped %d and %d\n", array[i + 1], array[high]);
-    }
+    /* Swap array[i + 1] and array[high] */
+    int temp = array[i + 1];
+    array[i + 1] = array[high];
+    array[high] = temp;
+    printf("Swapped %d and %d\n", array[i + 1], array[high]);
 
-    return i + 1;
+    return (i + 1);
 }
+
 
 /**
  * quick_sort - Sorts an array of integers in ascending order using Quick Sort
