@@ -1,6 +1,9 @@
 #include "sort.h"
 #include <stdio.h>
 
+/* Function prototype for lomuto_partition */
+int lomuto_partition(int *array, int low, int high);
+
 /**
  * quick_sort_recursive - Recursive function to perform quick sort
  * @array: Array to be sorted
