@@ -1,51 +1,33 @@
-#include "sort.h"
 #include <stdio.h>
-#include <stdlib.h>
-void sorted_insert(listint_t **head, listint_t *node)
-{
-	listint_t *current;
-
-	if (*head == NULL || (*head)->n >= node->n)
-	{
-		node->next = *head;
-		if (*head != NULL)
-			(*head)->prev = node;
-		*head = node;
-	}
-	else
-	{
-	current = *head;
-	while (current->next != NULL && current->next->n < node->n)
-		current = current->next;
-
-	node->next = current->next;
-	if (current->next != NULL)
-		current->next->prev = node;
-	current->next = node;
-	node->prev = current;
-	}
-}
+#include "sort.h"
 
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *sorted, *current, *next;
+	listint_t *x, *y, *z;
 
-	sorted = NULL;
-	current = *list;
+	if (!list || !*list || !(*list)->next)
+		return;
 
-	while (current != NULL)
+	for (x = (*list)->next; x != NULL; x = y)
 	{
-	next = current->next;
+		y = x->next;
 
-	current->prev = NULL;
-	current->next = NULL;
+		while (x->prev && x->n < x->prev->n)
+		{
+			z = x->prev;
 
-	sorted_insert(&sorted, current);
+			z->next = x->next;
+			if (x->next)
+				x->next->prev = z;
+			x->next = z;
+			x->prev = z->prev;
+			x->next->prev = x;
+			if (x->prev)
+				x->prev->next = x;
+			else
+				*list = x;
 
-	print_list(sorted);
-
-	current = next;
+			print_list(*list);
+		}
 	}
-
-	*list = sorted;
 }
