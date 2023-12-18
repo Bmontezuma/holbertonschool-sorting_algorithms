@@ -10,7 +10,7 @@ void sorted_insert(listint_t **head, listint_t *node)
 		node->next = *head;
 		if (*head != NULL)
 			(*head)->prev = node;
-			*head = node;
+		*head = node;
 	}
 	else
 	{
