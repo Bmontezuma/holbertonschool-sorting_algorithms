@@ -22,11 +22,13 @@ void selection_sort(int *array, size_t size)
 	if (!array || size < 2)
 		return;
 
-	size_t i, j, min_index;
+	size_t i;
+	size_t j;
+	size_t min_index;
 
 	for (i = 0; i < size - 1; ++i)
 	{
-	min_index = i;
+		min_index = i;
 
 	for (j = i + 1; j < size; ++j)
 	{
