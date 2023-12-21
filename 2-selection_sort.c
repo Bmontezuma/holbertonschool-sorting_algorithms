@@ -1,35 +1,77 @@
 #include "sort.h"
+#include <stdio.h>
 
 /**
- * selection_sort - Sorts an array of integers using the Selection sort algorithm.
- * @array: The array to be sorted.
- * @size: Number of elements in the array.
+ * print_array - Function to print the elements of an array.
+ * @array: The array to print.
+ * @size: The number of elements in the array.
+ */
+void print_array(const int *array, size_t size)
+{
+	size_t i;
+
+	for (i = 0; i < size; i++)
+	{
+		printf("%d", array[i]);
+		if (i < size - 1)
+			printf(" ");
+	}
+	printf("\n");
+}
+
+/**
+ * swap - Function to swap two elements in an array.
+ * @a: Pointer to the first element.
+ * @b: Pointer to the second element.
+ */
+void swap(int *a, int *b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+/**
+ * selection_sort - Function to implement selection sort algorithm on an array.
+ * @array: The array to sort.
+ * @size: The number of elements in the array.
  */
 void selection_sort(int *array, size_t size)
 {
-    size_t i, j, min_idx;
-    int temp;
+	size_t i, j, min;
 
-    if (array == NULL || size < 2)
-        return;
+	for (i = 0; i < size - 1; i++)
+	{
+		min = i;
+		for (j = i + 1; j < size; j++)
+		{
+			if (array[j] < array[min])
+				min = j;
+		}
 
-    for (i = 0; i < size - 1; i++)
-    {
-        min_idx = i;
-        for (j = i + 1; j < size; j++)
-        {
-            if (array[j] < array[min_idx])
-                min_idx = j;
-        }
+		swap(&array[min], &array[i]);
+		print_array(array, size);
+	}
+}
 
-        if (min_idx != i)
-        {
-            /* Swap elements and print the array after each swap */
-            temp = array[i];
-            array[i] = array[min_idx];
-            array[min_idx] = temp;
-            print_array(array, size);
-        }
-    }
+/**
+ * main - Main function to demonstrate selection sort on an array.
+ * Return: 0 on success.
+ */
+int main(void)
+{
+	int arr[] = {64, 25, 12, 22, 11};
+	size_t size = sizeof(arr) / sizeof(arr[0]);
+
+	/* Print the original array */
+	print_array(arr, size);
+
+	/* Perform selection sort */
+	selection_sort(arr, size);
+
+	/* Print the sorted array */
+	print_array(arr, size);
+
+	return (0);
 }
 
